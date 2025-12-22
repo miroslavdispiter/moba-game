@@ -7,15 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.AuthentificationFolder
+namespace Infrastructure.Services.AuthentificationFolder
 {
     public class AuthentificationService : IAuthentification
     {
         IUserRepository _userRepository = new UserRepository();
 
-        public AuthentificationService() { }
+        public AuthentificationService(IUserRepository userRepository) 
+        {
+            _userRepository = userRepository;
+        }
 
-        public User? Login(string username, string password)
+        public User? LoginUser(string username, string password)
         {
             User? user = _userRepository.Users().FirstOrDefault(u => u.Username.Equals(username));
 

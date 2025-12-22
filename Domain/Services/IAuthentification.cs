@@ -9,6 +9,6 @@ namespace Domain.Services
 {
     public interface IAuthentification
     {
-        public User? Login(string username, string password);
+        public User? LoginUser(string username, string password);
     }
 }

@@ -1,5 +1,8 @@
-﻿using Domain.Services;
-using Services.AuthentificationFolder;
+﻿using Domain.Models;
+using Domain.Repositories;
+using Domain.Services;
+using Infrastructure.Services.AuthentificationFolder;
+using Presentation.AuthentificationFolderPresentation;
 
 namespace Application
 {
@@ -8,31 +11,10 @@ namespace Application
         static void Main(string[] args)
         {
             // AUTHENTIFICATION
-
-            IAuthentification auth = new AuthentificationService();
-
-            Console.WriteLine("\n--- LOGIN ---\n");
-
-            while (true)
-            {
-                Console.WriteLine("Username: ");
-                string username = Console.ReadLine();
-                Console.WriteLine();
-
-                Console.WriteLine("Password: ");
-                string password = Console.ReadLine();
-                Console.WriteLine();
-
-                if (auth.Login(username, password) == null)
-                {
-                    Console.WriteLine("Wrong username or password.");
-                }
-                else
-                {
-                    Console.WriteLine("Successful login.");
-                    break;
-                }
-            }
+            IUserRepository userRepository = new UserRepository();
+            IAuthentification auth = new AuthentificationService(userRepository);
+            var authPresentation = new AuthentificationPresentation(auth);
+            User? loggedUser = authPresentation.Login();
         }
     }
 }
