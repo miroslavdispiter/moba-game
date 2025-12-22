@@ -1,1 +1,0 @@
-No work this Sunday.
