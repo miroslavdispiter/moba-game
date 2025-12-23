@@ -24,6 +24,18 @@ namespace Application
             var entities = entityPresentation.GenerateEntities();
 
             Console.WriteLine($"Generated {entities.Count} entities.");
+
+            // MAP INPUT
+
+            // SHOP INPUT
+
+            // NUMBER OF PLAYERS IN THE TEAM
+
+            // NAMES OF PLAYERS IN BLUE AND THEN RED TEAM
+
+            // FIGHT SIMULATION -> 10-45sec
+
+            // STATISTICS
         }
     }
 }
