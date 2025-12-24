@@ -28,7 +28,7 @@ namespace Application
 
             Console.WriteLine($"Generated {entities.Count} entities.");
 
-            // MAP INPUT
+            // SELECT MAP
             IMapRepository mapRepository = new MapRepository();
             ISelectMap selectMapService = new SelectMapService(mapRepository);
             var selectMapPresentation = new SelectMapPresentation(selectMapService);
@@ -39,7 +39,7 @@ namespace Application
                 Console.WriteLine($"You selected: {chosenMap.Name}");
             }
 
-            // SHOP INPUT
+            // SELECT SHOP
 
             // NUMBER OF PLAYERS IN THE TEAM
 

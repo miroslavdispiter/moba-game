@@ -12,5 +12,15 @@ namespace Domain.Models
         public int Price { get; set; }
         public int IncreaseAttack { get; set; }
         public int AvailableQuantity { get; set; }
+
+        public Potion() { }
+
+        public Potion(string name, int price, int increaseAttack, int availableQuantity)
+        {
+            Name = name;
+            Price = price;
+            IncreaseAttack = increaseAttack;
+            AvailableQuantity = availableQuantity;
+        }
     }
 }
