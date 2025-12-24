@@ -1,10 +1,13 @@
 ﻿using Domain.Models;
 using Domain.Repositories;
 using Domain.Services;
+using Infrastructure.Repositories.MapRepositoryFolder;
 using Infrastructure.Services.AuthentificationFolder;
 using Infrastructure.Services.GenerateEntityFolder;
+using Infrastructure.Services.SelectMapFolder;
 using Presentation.AuthentificationFolderPresentation;
 using Presentation.EntityPresentation;
+using Presentation.SelectMapPresentation;
 
 namespace Application
 {
@@ -14,8 +17,8 @@ namespace Application
         {
             // AUTHENTIFICATION
             IUserRepository userRepository = new UserRepository();
-            IAuthentification auth = new AuthentificationService(userRepository);
-            var authPresentation = new AuthentificationPresentation(auth);
+            IAuthentification authService = new AuthentificationService(userRepository);
+            var authPresentation = new AuthentificationPresentation(authService);
             User? loggedUser = authPresentation.Login();
 
             // ENTITY GENERATION
@@ -26,6 +29,15 @@ namespace Application
             Console.WriteLine($"Generated {entities.Count} entities.");
 
             // MAP INPUT
+            IMapRepository mapRepository = new MapRepository();
+            ISelectMap selectMapService = new SelectMapService(mapRepository);
+            var selectMapPresentation = new SelectMapPresentation(selectMapService);
+            Map? chosenMap = selectMapPresentation.EnterMap();
+
+            if (chosenMap != null)
+            {
+                Console.WriteLine($"You selected: {chosenMap.Name}");
+            }
 
             // SHOP INPUT
 

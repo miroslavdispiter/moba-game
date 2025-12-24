@@ -11,7 +11,7 @@ namespace Infrastructure.Services.AuthentificationFolder
 {
     public class AuthentificationService : IAuthentification
     {
-        IUserRepository _userRepository = new UserRepository();
+        private readonly IUserRepository _userRepository;
 
         public AuthentificationService(IUserRepository userRepository) 
         {
