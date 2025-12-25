@@ -19,7 +19,9 @@ namespace Infrastructure.Repositories.WeaponRepositoryFolder
                 new Weapon("Mace", 100, 20, 5),
                 new Weapon("Sword", 150, 30, 3),
                 new Weapon("Bow", 120, 25, 7),
-                new Weapon("Dagger", 80, 15, 10)
+                new Weapon("Dagger", 80, 15, 10),
+                new Weapon("Axe", 130, 28, 4),
+                new Weapon("Crossbow", 140, 27, 6)
             };
         }
 

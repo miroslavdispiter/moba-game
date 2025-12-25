@@ -19,7 +19,9 @@ namespace Infrastructure.Repositories.PotionRepositoryFolder
                 new Potion("Health Potion", 50, 40, 10),
                 new Potion("Mana Potion", 40, 25, 8),
                 new Potion("Energy Drink", 30, 23, 5),
-                new Potion("Shield Potion", 60, 35, 4)
+                new Potion("Shield Potion", 60, 35, 4),
+                new Potion("Invisibility Elixir", 70, 50, 3),
+                new Potion("Speed Brew", 45, 30, 6)
             };
         }
         public List<Potion> Potions()

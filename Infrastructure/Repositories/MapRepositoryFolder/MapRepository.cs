@@ -18,7 +18,9 @@ namespace Infrastructure.Repositories.MapRepositoryFolder
             MapsList = new List<Map>()
             {
                 new Map("Cosmic Ruins", MapType.Summer, 10, "", "", 40),
-                new Map("Crush Site", MapType.Winter, 6, "", "", 40)
+                new Map("Crush Site", MapType.Winter, 6, "", "", 40),
+                new Map("Sunset Valley", MapType.Summer, 8, "", "", 40),
+                new Map("Frostpeak Ridge", MapType.Winter, 9, "", "", 40)
             };
         }
 
