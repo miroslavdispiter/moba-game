@@ -40,6 +40,7 @@ namespace Application
             }
 
             // SELECT SHOP
+            // IStoreRepository storeRepository = new StoreRepository()
 
             // NUMBER OF PLAYERS IN THE TEAM
 

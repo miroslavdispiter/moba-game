@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Helpers.CalculateTotalValueSoldHelper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +12,15 @@ namespace Domain.Models
         public int Id { get; set; }
         public IEnumerable<Weapon> Weapons { get; set; }
         public IEnumerable<Potion> Potions { get; set; }
-        public int TotalValueSold { get; set; }
+        public int TotalValue => CalculateTotalValueSold.Calculate(Weapons, Potions);
 
         public Store() { }
 
-        public Store(int id, IEnumerable<Weapon> weapons, IEnumerable<Potion> potions, int totalValueSold)
+        public Store(int id, IEnumerable<Weapon> weapons, IEnumerable<Potion> potions)
         {
             Id = id;
             Weapons = weapons;
             Potions = potions;
-            TotalValueSold = totalValueSold;
         }
     }
 }
