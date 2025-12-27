@@ -2,9 +2,11 @@
 using Domain.Repositories;
 using Domain.Services;
 using Infrastructure.Repositories.MapRepositoryFolder;
+using Infrastructure.Repositories.StoreRepositoryFolder;
 using Infrastructure.Services.AuthentificationFolder;
 using Infrastructure.Services.GenerateEntityFolder;
 using Infrastructure.Services.SelectMapFolder;
+using Infrastructure.Services.SelectStoreFolder;
 using Presentation.AuthentificationFolderPresentation;
 using Presentation.EntityPresentation;
 using Presentation.SelectMapPresentation;
@@ -40,7 +42,9 @@ namespace Application
             }
 
             // SELECT SHOP
-            // IStoreRepository storeRepository = new StoreRepository()
+            IStoreRepository storeRepository = new StoreRepository();
+            ISelectStore selectStoreService = new SelectStoreService(storeRepository);
+            // var selectStorePresentation = new SelectStorePresentation(selectStoreService);
 
             // NUMBER OF PLAYERS IN THE TEAM
 
