@@ -10,6 +10,7 @@ using Infrastructure.Services.SelectStoreFolder;
 using Presentation.AuthentificationFolderPresentation;
 using Presentation.EntityPresentation;
 using Presentation.SelectMapPresentation;
+using Presentation.SelectStorePresentation;
 
 namespace Application
 {
@@ -44,7 +45,13 @@ namespace Application
             // SELECT SHOP
             IStoreRepository storeRepository = new StoreRepository();
             ISelectStore selectStoreService = new SelectStoreService(storeRepository);
-            // var selectStorePresentation = new SelectStorePresentation(selectStoreService);
+            var selectStorePresentation = new SelectStorePresentation(selectStoreService);
+            Store? chosenStore = selectStorePresentation.EnterStoreId();
+
+            if (chosenStore != null)
+            {
+                Console.WriteLine($"You selected store: {chosenStore.Id}");
+            }
 
             // NUMBER OF PLAYERS IN THE TEAM
 

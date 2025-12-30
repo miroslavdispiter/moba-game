@@ -17,10 +17,24 @@ namespace Presentation.SelectStorePresentation
             _selectStore = selectStore;
         }
 
-        public Store? EnterMapId()
-        { 
-            // TO-DO
-            return new Store();
+        public Store? EnterStoreId()
+        {
+            Console.WriteLine("- - - - - STORE - - - - -");
+
+            while (true)
+            {
+                Console.WriteLine("Enter store ID: ");
+                int storeId = int.Parse(Console.ReadLine() ?? "");
+
+                var selectedStore = _selectStore.SelectStoreById(storeId);
+
+                if (selectedStore != null)
+                {
+                    return selectedStore;
+                }
+
+                Console.WriteLine("Store not found. Try again.");
+            }
         }
     }
 }
