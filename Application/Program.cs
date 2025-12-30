@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using Domain.Helpers.PlayerCountHelper;
+using Domain.Models;
 using Domain.Repositories;
 using Domain.Services;
 using Infrastructure.Repositories.MapRepositoryFolder;
@@ -9,6 +10,7 @@ using Infrastructure.Services.SelectMapFolder;
 using Infrastructure.Services.SelectStoreFolder;
 using Presentation.AuthentificationFolderPresentation;
 using Presentation.EntityPresentation;
+using Presentation.NumberOfPlayersPresentation;
 using Presentation.SelectMapPresentation;
 using Presentation.SelectStorePresentation;
 
@@ -54,10 +56,16 @@ namespace Application
             }
 
             // NUMBER OF PLAYERS IN THE TEAM
+            var numberOfPlayersPresentation = new NumberOfPlayersPresentation();
+            PlayerCount playerCount = numberOfPlayersPresentation.InputPlayersPerTeam(chosenMap.MaxPlayers);
 
             // NAMES OF PLAYERS IN BLUE AND THEN RED TEAM
 
             // FIGHT SIMULATION -> 10-45sec
+            Random rnd = new Random();
+            int seconds = rnd.Next(3, 8);
+            Console.WriteLine($"Bitka u toku. Trajace {seconds} sekundi.");
+            Thread.Sleep(seconds * 1000);
 
             // STATISTICS
         }
