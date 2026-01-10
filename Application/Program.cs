@@ -1,4 +1,5 @@
-﻿using Domain.Helpers.PlayerCountHelper;
+﻿using Domain.Helpers.NameOfTeamsHelper;
+using Domain.Helpers.PlayerCountHelper;
 using Domain.Models;
 using Domain.Repositories;
 using Domain.Services;
@@ -10,6 +11,7 @@ using Infrastructure.Services.SelectMapFolder;
 using Infrastructure.Services.SelectStoreFolder;
 using Presentation.AuthentificationFolderPresentation;
 using Presentation.EntityPresentation;
+using Presentation.NameOfTeamsPresentation;
 using Presentation.NumberOfPlayersPresentation;
 using Presentation.SelectMapPresentation;
 using Presentation.SelectStorePresentation;
@@ -58,6 +60,10 @@ namespace Application
             // NUMBER OF PLAYERS IN THE TEAM
             var numberOfPlayersPresentation = new NumberOfPlayersPresentation();
             PlayerCount playerCount = numberOfPlayersPresentation.InputPlayersPerTeam(chosenMap.MaxPlayers);
+
+            // NAMES OF THE BLUE AND THE RED TEAM
+            var nameOfTeamsPresentation = new NameOfTeamsPresentation();
+            TeamNames teamNames = nameOfTeamsPresentation.TeamsNameInput(chosenMap);
 
             // NAMES OF PLAYERS IN BLUE AND THEN RED TEAM
 
