@@ -10,7 +10,7 @@ namespace Domain.Models
     {
         public string Name { get; set; } = string.Empty;
         public int Price { get; set; }
-        public int IncreaseAttack { get; set; }
+        public int IncreaseHealth { get; set; }
         public int AvailableQuantity { get; set; }
 
         public Potion() { }
@@ -19,7 +19,7 @@ namespace Domain.Models
         {
             Name = name;
             Price = price;
-            IncreaseAttack = increaseAttack;
+            IncreaseHealth = increaseAttack;
             AvailableQuantity = availableQuantity;
         }
     }

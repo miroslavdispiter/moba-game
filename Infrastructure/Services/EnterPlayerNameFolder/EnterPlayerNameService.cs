@@ -19,7 +19,7 @@ namespace Infrastructure.Services.EnterPlayerNameFolder
             _heroRepository = heroRepository;
         }
 
-        public AssignHeroResult AssignHeroToPlayer(string id, string playerName, string heroName, Dictionary<string, string> currentDict)
+        public AssignHeroResult AssignHeroToPlayer(string id, string playerName, string heroName, Dictionary<string, Hero> currentDict)
         {
             Hero? selectedHero = _heroRepository.Heroes().FirstOrDefault(h => h.Name == heroName);
 
@@ -33,7 +33,7 @@ namespace Infrastructure.Services.EnterPlayerNameFolder
                 };
             }
 
-            currentDict[playerName] = selectedHero.Name;
+            currentDict[playerName] = selectedHero;
 
             return new AssignHeroResult
             {

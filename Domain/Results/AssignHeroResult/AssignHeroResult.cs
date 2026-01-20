@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,6 @@ namespace Domain.Results.AssignHeroResult
     {
         public bool Success { get; set; }
         public string? ErrorMessage { get; set; }
-        public Dictionary<string, string> Data { get; set; } = new();
+        public Dictionary<string, Hero> Data { get; set; } = new();
     }
 }

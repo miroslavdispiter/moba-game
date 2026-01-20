@@ -1,4 +1,5 @@
-﻿using Domain.Results.AssignHeroResult;
+﻿using Domain.Models;
+using Domain.Results.AssignHeroResult;
 using Domain.Results.TeamNamesHelper;
 using Domain.Services;
 using System;
@@ -25,11 +26,11 @@ namespace Presentation.PlayerNamesPresentation
             3. Spakuj u dictionary
             */
 
-        public Dictionary<string, string> EnterPlayersPresentation(string id, TeamNames teamNames, int numOfPlayers)
+        public Dictionary<string, Hero> EnterPlayersPresentation(string id, TeamNames teamNames, int numOfPlayers)
         {
             if (id == "blue")
             {
-                Dictionary<string, string> playerHeroBlueDict = new Dictionary<string, string>();
+                Dictionary<string, Hero> playerHeroBlueDict = new Dictionary<string, Hero>();
 
                 for (int i = 0; i < numOfPlayers; i++)
                 {
@@ -59,7 +60,7 @@ namespace Presentation.PlayerNamesPresentation
             }
             else if (id == "red")
             {
-                Dictionary<string, string> playerHeroRedDict = new Dictionary<string, string>();
+                Dictionary<string, Hero> playerHeroRedDict = new Dictionary<string, Hero>();
 
                 for (int i = 0; i < numOfPlayers; i++)
                 {
@@ -89,7 +90,7 @@ namespace Presentation.PlayerNamesPresentation
             else
             {
                 Console.WriteLine("Mistake.");
-                return new Dictionary<string, string>();
+                return new Dictionary<string, Hero>();
             }
     }
     }

@@ -1,4 +1,5 @@
-﻿using Domain.Results.AssignHeroResult;
+﻿using Domain.Models;
+using Domain.Results.AssignHeroResult;
 using Domain.Results.TeamNamesHelper;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Domain.Services
 {
     public interface IEnterPlayerName
     {
-        public AssignHeroResult AssignHeroToPlayer(string teamName, string playerName, string heroName, Dictionary<string, string> dictResult);
+        public AssignHeroResult AssignHeroToPlayer(string teamName, string playerName, string heroName, Dictionary<string, Hero> dictResult);
     }
 
 }

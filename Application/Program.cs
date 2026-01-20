@@ -6,7 +6,9 @@ using Domain.Services;
 using Infrastructure.Repositories.HeroRepositoryFolder;
 using Infrastructure.Repositories.MapRepositoryFolder;
 using Infrastructure.Repositories.StoreRepositoryFolder;
+using Infrastructure.Services.AttackFolder;
 using Infrastructure.Services.AuthentificationFolder;
+using Infrastructure.Services.BattleServiceFolder;
 using Infrastructure.Services.EnterPlayerNameFolder;
 using Infrastructure.Services.GenerateEntityFolder;
 using Infrastructure.Services.SelectMapFolder;
@@ -73,28 +75,19 @@ namespace Application
             IEnterPlayerName enterPlayerNameService = new EnterPlayerNameService(heroRepository);
             PlayerNamesPresentation playerNamesPresentation = new PlayerNamesPresentation(enterPlayerNameService);
 
-            Dictionary<string, string> bluePlayers = playerNamesPresentation.EnterPlayersPresentation("blue", teamNames, playerCount.BlueTeam);
-            Dictionary<string, string> redPlayers = playerNamesPresentation.EnterPlayersPresentation("red", teamNames, playerCount.RedTeam);
-
-            Console.WriteLine();
-
-            Console.WriteLine("\n[BLUE TEAM - PLAYERS AND HEROES]");
-            foreach (var entry in bluePlayers)
-            {
-                Console.WriteLine($"Player: {entry.Key} -> Hero: {entry.Value}");
-            }
-
-            Console.WriteLine("\n[RED TEAM - PLAYERS AND HEROES]");
-            foreach (var entry in redPlayers)
-            {
-                Console.WriteLine($"Player: {entry.Key} -> Hero: {entry.Value}");
-            }
+            Dictionary<string, Hero> bluePlayers = playerNamesPresentation.EnterPlayersPresentation("blue", teamNames, playerCount.BlueTeam);
+            Dictionary<string, Hero> redPlayers = playerNamesPresentation.EnterPlayersPresentation("red", teamNames, playerCount.RedTeam);
 
             // FIGHT SIMULATION -> 10-45sec
+            // ovo verovatno treba da ide u neki service
             Random rnd = new Random();
             int seconds = rnd.Next(3, 8);
             Console.WriteLine($"Bitka u toku. Trajace {seconds} sekundi.");
             Thread.Sleep(seconds * 1000);
+
+            IAttack attackService = new AttackService(entities, chosenStore);
+            IBattle battleService = new BattleService(attackService);
+            battleService.StartBattle(bluePlayers, redPlayers);
 
             // STATISTICS
         }

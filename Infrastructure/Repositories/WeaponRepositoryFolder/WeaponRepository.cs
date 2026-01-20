@@ -16,12 +16,14 @@ namespace Infrastructure.Repositories.WeaponRepositoryFolder
         {
             WeaponList = new List<Weapon>()
             {
-                new Weapon("Mace", 100, 20, 5),
-                new Weapon("Sword", 150, 30, 3),
-                new Weapon("Bow", 120, 25, 7),
-                new Weapon("Dagger", 80, 15, 10),
-                new Weapon("Axe", 130, 28, 4),
-                new Weapon("Crossbow", 140, 27, 6)
+                // first shop
+                new Weapon("Mace", 100, 30, 10),
+                new Weapon("Sword", 150, 50, 10),
+                new Weapon("Bow", 120, 40, 10),
+                // second shop
+                new Weapon("Dagger", 100, 30, 10),
+                new Weapon("Axe", 150, 50, 10),
+                new Weapon("Crossbow", 120, 40, 10)
             };
         }
 
