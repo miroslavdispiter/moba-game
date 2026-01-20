@@ -26,7 +26,7 @@ namespace Presentation.SelectStorePresentation
                 Console.WriteLine("Enter store ID: ");
                 int storeId = int.Parse(Console.ReadLine() ?? "");
 
-                var selectedStore = _selectStore.SelectStoreById(storeId);
+                Store? selectedStore = _selectStore.SelectStoreById(storeId);
 
                 if (selectedStore != null)
                 {

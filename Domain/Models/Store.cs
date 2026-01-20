@@ -14,7 +14,7 @@ namespace Domain.Models
         public IEnumerable<Potion> Potions { get; set; }
         public int TotalValue => CalculateTotalValueSold.Calculate(Weapons, Potions);
 
-        public Store() { }
+        public Store() { } // maybe delete later
 
         public Store(int id, IEnumerable<Weapon> weapons, IEnumerable<Potion> potions)
         {

@@ -13,7 +13,7 @@ namespace Infrastructure.Services.AuthentificationFolder
     {
         private readonly IUserRepository _userRepository;
 
-        public AuthentificationService(IUserRepository userRepository) 
+        public AuthentificationService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

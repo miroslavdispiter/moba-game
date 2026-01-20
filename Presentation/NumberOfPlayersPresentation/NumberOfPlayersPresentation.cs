@@ -1,4 +1,4 @@
-﻿using Domain.Helpers.PlayerCountHelper;
+﻿using Domain.Results.PlayerCountHelper;
 using Domain.Services;
 using System;
 using System.Collections.Generic;

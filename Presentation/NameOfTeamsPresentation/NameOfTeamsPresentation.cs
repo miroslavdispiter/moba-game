@@ -1,6 +1,6 @@
-﻿using Domain.Helpers.NameOfTeamsHelper;
-using Domain.Models;
+﻿using Domain.Models;
 using Domain.Repositories;
+using Domain.Results.TeamNamesHelper;
 using Domain.Services;
 using System;
 using System.Collections.Generic;
@@ -29,8 +29,8 @@ namespace Presentation.NameOfTeamsPresentation
                 redTeamName = Console.ReadLine() ?? string.Empty;
             }
 
-            selectedMap.BlueTeam = blueTeamName;
-            selectedMap.RedTeam = redTeamName;
+            //selectedMap.BlueTeam = blueTeamName;
+            //selectedMap.RedTeam = redTeamName;
 
             return new TeamNames
             {

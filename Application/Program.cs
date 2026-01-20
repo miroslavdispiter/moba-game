@@ -1,11 +1,13 @@
-﻿using Domain.Helpers.NameOfTeamsHelper;
-using Domain.Helpers.PlayerCountHelper;
-using Domain.Models;
+﻿using Domain.Models;
 using Domain.Repositories;
+using Domain.Results.PlayerCountHelper;
+using Domain.Results.TeamNamesHelper;
 using Domain.Services;
+using Infrastructure.Repositories.HeroRepositoryFolder;
 using Infrastructure.Repositories.MapRepositoryFolder;
 using Infrastructure.Repositories.StoreRepositoryFolder;
 using Infrastructure.Services.AuthentificationFolder;
+using Infrastructure.Services.EnterPlayerNameFolder;
 using Infrastructure.Services.GenerateEntityFolder;
 using Infrastructure.Services.SelectMapFolder;
 using Infrastructure.Services.SelectStoreFolder;
@@ -13,6 +15,7 @@ using Presentation.AuthentificationFolderPresentation;
 using Presentation.EntityPresentation;
 using Presentation.NameOfTeamsPresentation;
 using Presentation.NumberOfPlayersPresentation;
+using Presentation.PlayerNamesPresentation;
 using Presentation.SelectMapPresentation;
 using Presentation.SelectStorePresentation;
 
@@ -25,20 +28,20 @@ namespace Application
             // AUTHENTIFICATION
             IUserRepository userRepository = new UserRepository();
             IAuthentification authService = new AuthentificationService(userRepository);
-            var authPresentation = new AuthentificationPresentation(authService);
+            AuthentificationPresentation authPresentation = new AuthentificationPresentation(authService);
             User? loggedUser = authPresentation.Login();
 
             // ENTITY GENERATION
             IGenerateEntity generateEntity = new GenerateEntity();
-            var entityPresentation = new EntityPresentation(generateEntity);
-            var entities = entityPresentation.GenerateEntities();
+            EntityPresentation entityPresentation = new EntityPresentation(generateEntity);
+            List<Entity> entities = entityPresentation.GenerateEntities();
 
             Console.WriteLine($"Generated {entities.Count} entities.");
 
             // SELECT MAP
             IMapRepository mapRepository = new MapRepository();
             ISelectMap selectMapService = new SelectMapService(mapRepository);
-            var selectMapPresentation = new SelectMapPresentation(selectMapService);
+            SelectMapPresentation selectMapPresentation = new SelectMapPresentation(selectMapService);
             Map? chosenMap = selectMapPresentation.EnterMap();
 
             if (chosenMap != null)
@@ -49,7 +52,7 @@ namespace Application
             // SELECT SHOP
             IStoreRepository storeRepository = new StoreRepository();
             ISelectStore selectStoreService = new SelectStoreService(storeRepository);
-            var selectStorePresentation = new SelectStorePresentation(selectStoreService);
+            SelectStorePresentation selectStorePresentation = new SelectStorePresentation(selectStoreService);
             Store? chosenStore = selectStorePresentation.EnterStoreId();
 
             if (chosenStore != null)
@@ -58,14 +61,34 @@ namespace Application
             }
 
             // NUMBER OF PLAYERS IN THE TEAM
-            var numberOfPlayersPresentation = new NumberOfPlayersPresentation();
+            NumberOfPlayersPresentation numberOfPlayersPresentation = new NumberOfPlayersPresentation();
             PlayerCount playerCount = numberOfPlayersPresentation.InputPlayersPerTeam(chosenMap.MaxPlayers);
 
             // NAMES OF THE BLUE AND THE RED TEAM
-            var nameOfTeamsPresentation = new NameOfTeamsPresentation();
+            NameOfTeamsPresentation nameOfTeamsPresentation = new NameOfTeamsPresentation();
             TeamNames teamNames = nameOfTeamsPresentation.TeamsNameInput(chosenMap);
 
-            // NAMES OF PLAYERS IN BLUE AND THEN RED TEAM
+            // NAMES OF PLAYERS AND HEROES IN BLUE AND THEN RED TEAM
+            IHeroRepository heroRepository = new HeroRepository();
+            IEnterPlayerName enterPlayerNameService = new EnterPlayerNameService(heroRepository);
+            PlayerNamesPresentation playerNamesPresentation = new PlayerNamesPresentation(enterPlayerNameService);
+
+            Dictionary<string, string> bluePlayers = playerNamesPresentation.EnterPlayersPresentation("blue", teamNames, playerCount.BlueTeam);
+            Dictionary<string, string> redPlayers = playerNamesPresentation.EnterPlayersPresentation("red", teamNames, playerCount.RedTeam);
+
+            Console.WriteLine();
+
+            Console.WriteLine("\n[BLUE TEAM - PLAYERS AND HEROES]");
+            foreach (var entry in bluePlayers)
+            {
+                Console.WriteLine($"Player: {entry.Key} -> Hero: {entry.Value}");
+            }
+
+            Console.WriteLine("\n[RED TEAM - PLAYERS AND HEROES]");
+            foreach (var entry in redPlayers)
+            {
+                Console.WriteLine($"Player: {entry.Key} -> Hero: {entry.Value}");
+            }
 
             // FIGHT SIMULATION -> 10-45sec
             Random rnd = new Random();
