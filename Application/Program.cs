@@ -9,12 +9,14 @@ using Infrastructure.Repositories.StoreRepositoryFolder;
 using Infrastructure.Services.AttackFolder;
 using Infrastructure.Services.AuthentificationFolder;
 using Infrastructure.Services.BattleServiceFolder;
+using Infrastructure.Services.BattleStatisticsFolder;
 using Infrastructure.Services.EnterPlayerNameFolder;
 using Infrastructure.Services.GenerateEntityFolder;
 using Infrastructure.Services.SelectMapFolder;
 using Infrastructure.Services.SelectStoreFolder;
 using Infrastructure.Services.StoreProviderFolder;
 using Presentation.AuthentificationFolderPresentation;
+using Presentation.BattleStatisticsPresentation;
 using Presentation.EntityPresentation;
 using Presentation.NameOfTeamsPresentation;
 using Presentation.NumberOfPlayersPresentation;
@@ -68,11 +70,6 @@ namespace Application
             Dictionary<string, Hero> redPlayers = playerNamesPresentation.EnterPlayersPresentation("red", teamNames, playerCount.RedTeam);
 
             // FIGHT SIMULATION -> 10-45sec
-            // Ovo verovatno treba da ide u neki service
-            Random rnd = new Random();
-            int seconds = rnd.Next(3, 8);
-            Console.WriteLine($"Bitka u toku. Trajace {seconds} sekundi.");
-            Thread.Sleep(seconds * 1000);
 
             IStoreProvider storeProvider = new StoreProviderService(chosenStore);
             IAttack attackService = new AttackService(entities, storeProvider);
@@ -80,6 +77,11 @@ namespace Application
             battleService.StartBattle(bluePlayers, redPlayers);
 
             // STATISTICS
+            // Must fix DI problem later
+            
+            IBattleStatistics battleStatisticsService = new BattleStatisticsService();
+            BattleStatisticsPresentation battleStatsPresentation = new BattleStatisticsPresentation(battleStatisticsService);
+            battleStatsPresentation.ChooseOutputAndShow(bluePlayers.Values.ToList(), redPlayers.Values.ToList(), chosenMap, chosenStore);
         }
     }
 }
