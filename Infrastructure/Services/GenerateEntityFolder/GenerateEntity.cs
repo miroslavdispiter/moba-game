@@ -16,8 +16,8 @@ namespace Infrastructure.Services.GenerateEntityFolder
         {
             List<Entity> listOfEntities = new List<Entity>();
             
-            // hardcoded 40 entites, because i want every game to generate the same amount entities
-            for (int i = 0; i < 40; i++)
+            // hardcoded 200 entites, because i want every game to generate the same amount entities
+            for (int i = 0; i < 200; i++)
             {
                 var entity = new Entity();
                 listOfEntities.Add(entity);

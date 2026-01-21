@@ -15,6 +15,7 @@ namespace Infrastructure.Services.AttackFolder
         private List<Potion> _potions;
         private Store _store;
         private Random _rand = new Random();
+        static int entitet = 0;
 
         public AttackService(IEnumerable<Entity> entities, Store store)
         {
@@ -26,7 +27,14 @@ namespace Infrastructure.Services.AttackFolder
 
         public void AttackEntity(Hero attacker)
         {
-            if (_entities.Count == 0) return;
+            if (_entities.Count == 0) {
+                Console.WriteLine("1. Entiteta vise nema, pa nema sta da napadne.\n");
+                return;
+            }
+
+            entitet++;
+
+            Console.WriteLine($"0. Ubijen {entitet}. entitet.");
 
             attacker.Gold += _entities[0].Value;
             _entities.RemoveAt(0);
@@ -51,6 +59,7 @@ namespace Infrastructure.Services.AttackFolder
                     defender.HealthPoints += potion.IncreaseHealth;
                     defender.Gold -= potion.Price;
                     potion.AvailableQuantity--;
+                    Console.WriteLine("2. Health potion bought.");
                 }
             }
 
@@ -61,11 +70,13 @@ namespace Infrastructure.Services.AttackFolder
                 {
                     attacker.AttackPower += potion.IncreaseHealth; // Increase attack power, not health
                     potion.AvailableQuantity--;
+                    Console.WriteLine("3. Strength potion bought.");
                 }
                 lucky = 0;
             }
 
             defender.HealthPoints -= attacker.AttackPower;
+            Console.WriteLine("4. Attacker attacked defender.");
 
             if (attacker.Gold >= 500)
             {
@@ -74,6 +85,7 @@ namespace Infrastructure.Services.AttackFolder
 
                 if (attacker.Gold >= weapon.Price && weapon.AvailableQuantity > 0)
                 {
+                    Console.WriteLine("5. Attacker bought something in a shop.");
                     attacker.AttackPower += weapon.IncreaseAttack;
                     attacker.Gold -= weapon.Price;
                     weapon.AvailableQuantity--;

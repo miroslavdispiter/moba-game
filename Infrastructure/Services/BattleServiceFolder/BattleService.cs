@@ -63,6 +63,7 @@ namespace Infrastructure.Services.BattleServiceFolder
                         if (defender.HealthPoints <= 0) // DEAD
                         {
                             redList.Remove(defender);
+                            Console.WriteLine("--- ONE PLAYER IN RED TEAM = DEAD ---");
                         }
                     }
                 }
@@ -87,6 +88,7 @@ namespace Infrastructure.Services.BattleServiceFolder
                         if (defender.HealthPoints <= 0)
                         {
                             bluesList.Remove(defender);
+                            Console.WriteLine("--- ONE PLAYER IN BLUE TEAM = DEAD ---");
                         }
                     }
                 }

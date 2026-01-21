@@ -16,8 +16,8 @@ namespace Infrastructure.Repositories.PotionRepositoryFolder
         {
             PotionList = new List<Potion>()
             {
-                new Potion("Health Potion", 70, 50, 10),
-                new Potion("Strength Potion", 70, 0, 10)
+                new Potion("Health Potion", 90, 120, 40),
+                new Potion("Strength Potion", 120, 50, 30)
             };
         }
         public List<Potion> Potions()

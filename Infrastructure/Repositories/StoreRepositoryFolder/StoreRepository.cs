@@ -17,26 +17,26 @@ namespace Infrastructure.Repositories.StoreRepositoryFolder
             {
                 new Store(1, new List<Weapon>()
                 {
-                    new Weapon("Mace", 100, 30, 10),
-                    new Weapon("Sword", 150, 50, 10),
-                    new Weapon("Bow", 120, 40, 10)
+                    new Weapon("Mace", 150, 60, 25),
+                    new Weapon("Sword", 200, 80, 25),
+                    new Weapon("Longbow", 180, 70, 25)
                 },
                 new List<Potion>()
                 {
-                    new Potion("Health Potion", 70, 50, 10),
-                    new Potion("Strength Potion", 70, 50, 10)
+                    new Potion("Health Potion", 90, 120, 40),
+                    new Potion("Strength Potion", 120, 50, 30)
                 }),
 
                 new Store(2, new List<Weapon>()
                 {
-                    new Weapon("Dagger", 100, 30, 10),
-                    new Weapon("Axe", 150, 50, 10),
-                    new Weapon("Crossbow", 120, 40, 10)
+                    new Weapon("Dagger", 100, 45, 25),
+                    new Weapon("Axe", 220, 90, 25),
+                    new Weapon("Crossbow", 170, 75, 25)
                 },
                 new List<Potion>()
                 {
-                    new Potion("Health Potion", 70, 50, 10),
-                    new Potion("Strength Potion", 70, 0, 10)
+                    new Potion("Health Potion", 90, 120, 40),
+                    new Potion("Strength Potion", 120, 50, 30)
                 }),
             };
         }
