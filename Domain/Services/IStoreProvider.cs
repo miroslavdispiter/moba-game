@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Services
 {
-    public interface IGenerateEntity
+    public interface IStoreProvider
     {
-        public List<Entity> GenerateEntities(int numOfEnt);
+        Store GetStore();
     }
 }

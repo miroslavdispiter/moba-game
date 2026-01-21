@@ -13,6 +13,7 @@ using Infrastructure.Services.EnterPlayerNameFolder;
 using Infrastructure.Services.GenerateEntityFolder;
 using Infrastructure.Services.SelectMapFolder;
 using Infrastructure.Services.SelectStoreFolder;
+using Infrastructure.Services.StoreProviderFolder;
 using Presentation.AuthentificationFolderPresentation;
 using Presentation.EntityPresentation;
 using Presentation.NameOfTeamsPresentation;
@@ -36,9 +37,7 @@ namespace Application
             // ENTITY GENERATION
             IGenerateEntity generateEntity = new GenerateEntity();
             EntityPresentation entityPresentation = new EntityPresentation(generateEntity);
-            List<Entity> entities = entityPresentation.GenerateEntities();
-
-            Console.WriteLine($"Generated {entities.Count} entities.");
+            List<Entity> entities = entityPresentation.EnterNumOfEntities();
 
             // SELECT MAP
             IMapRepository mapRepository = new MapRepository();
@@ -46,21 +45,11 @@ namespace Application
             SelectMapPresentation selectMapPresentation = new SelectMapPresentation(selectMapService);
             Map? chosenMap = selectMapPresentation.EnterMap();
 
-            if (chosenMap != null)
-            {
-                Console.WriteLine($"You selected: {chosenMap.Name}");
-            }
-
             // SELECT SHOP
             IStoreRepository storeRepository = new StoreRepository();
             ISelectStore selectStoreService = new SelectStoreService(storeRepository);
             SelectStorePresentation selectStorePresentation = new SelectStorePresentation(selectStoreService);
             Store? chosenStore = selectStorePresentation.EnterStoreId();
-
-            if (chosenStore != null)
-            {
-                Console.WriteLine($"You selected store: {chosenStore.Id}");
-            }
 
             // NUMBER OF PLAYERS IN THE TEAM
             NumberOfPlayersPresentation numberOfPlayersPresentation = new NumberOfPlayersPresentation();
@@ -79,13 +68,14 @@ namespace Application
             Dictionary<string, Hero> redPlayers = playerNamesPresentation.EnterPlayersPresentation("red", teamNames, playerCount.RedTeam);
 
             // FIGHT SIMULATION -> 10-45sec
-            // ovo verovatno treba da ide u neki service
+            // Ovo verovatno treba da ide u neki service
             Random rnd = new Random();
             int seconds = rnd.Next(3, 8);
             Console.WriteLine($"Bitka u toku. Trajace {seconds} sekundi.");
             Thread.Sleep(seconds * 1000);
 
-            IAttack attackService = new AttackService(entities, chosenStore);
+            IStoreProvider storeProvider = new StoreProviderService(chosenStore);
+            IAttack attackService = new AttackService(entities, storeProvider);
             IBattle battleService = new BattleService(attackService);
             battleService.StartBattle(bluePlayers, redPlayers);
 

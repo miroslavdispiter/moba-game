@@ -19,7 +19,7 @@ namespace Presentation.SelectStorePresentation
 
         public Store? EnterStoreId()
         {
-            Console.WriteLine("- - - - - STORE - - - - -");
+            Console.WriteLine("\n--- STORE ---");
 
             while (true)
             {
@@ -28,12 +28,15 @@ namespace Presentation.SelectStorePresentation
 
                 Store? selectedStore = _selectStore.SelectStoreById(storeId);
 
-                if (selectedStore != null)
+                if (selectedStore == null)
                 {
+                    Console.WriteLine("Store not found. Try again.");
+                }
+                else
+                {
+                    Console.WriteLine($"You selected store: {selectedStore.Id}");
                     return selectedStore;
                 }
-
-                Console.WriteLine("Store not found. Try again.");
             }
         }
     }

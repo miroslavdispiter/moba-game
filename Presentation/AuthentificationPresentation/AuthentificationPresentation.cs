@@ -36,11 +36,11 @@ namespace Presentation.AuthentificationFolderPresentation
 
                 if (loggedUser == null)
                 {
-                    Console.WriteLine("Wrong username or password.");
+                    Console.WriteLine("Wrong username or password.\n");
                 }
                 else
                 {
-                    Console.WriteLine("Successful login.");
+                    Console.WriteLine($"--- WELCOME {loggedUser.Username}! ---");
                     return loggedUser;
                 }
             }

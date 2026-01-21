@@ -10,19 +10,21 @@ namespace Infrastructure.Services.AttackFolder
 {
     public class AttackService : IAttack
     {
+        private readonly IStoreProvider _storeProvider;
+        private Store _store;
         private List<Entity> _entities = new List<Entity>();
         private List<Weapon> _weapons;
         private List<Potion> _potions;
-        private Store _store;
         private Random _rand = new Random();
         static int entitet = 0;
 
-        public AttackService(IEnumerable<Entity> entities, Store store)
+        public AttackService(IEnumerable<Entity> entities, IStoreProvider storeProvider)
         {
-            _store = store;
             _entities = entities.ToList();
-            _weapons = store.Weapons.ToList();
-            _potions = store.Potions.ToList();
+            _storeProvider = storeProvider;
+            _store = _storeProvider.GetStore();
+            _weapons = _store.Weapons.ToList();
+            _potions = _store.Potions.ToList();
         }
 
         public void AttackEntity(Hero attacker)
@@ -77,6 +79,15 @@ namespace Infrastructure.Services.AttackFolder
 
             defender.HealthPoints -= attacker.AttackPower;
             Console.WriteLine("4. Attacker attacked defender.");
+
+            if (defender.HealthPoints <= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"⚔️ {attacker.Name} defeated {defender.Name} and earned 300 gold!");
+                Console.ResetColor();
+
+                attacker.Gold += 300;
+            }
 
             if (attacker.Gold >= 500)
             {

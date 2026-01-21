@@ -18,10 +18,16 @@ namespace Presentation.EntityPresentation
             _generateEntityService = generateEntityService;
         }
 
-        public List<Entity> GenerateEntities()
+        public List<Entity> EnterNumOfEntities()
         {
-            Console.WriteLine("\nEntities spawned.");
-            return _generateEntityService.GenerateEntities();
+            Console.WriteLine("\nNumber of entities in the game: ");
+            int numberOfEntities = int.Parse(Console.ReadLine() ?? "");
+
+            List<Entity> entitiesSpawned = _generateEntityService.GenerateEntities(numberOfEntities);
+
+            Console.WriteLine($"--- {numberOfEntities} entities spawned! ---");
+
+            return entitiesSpawned;
         }
     }
 }

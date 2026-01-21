@@ -19,21 +19,24 @@ namespace Presentation.SelectMapPresentation
 
         public Map? EnterMap()
         {
-            Console.WriteLine("- - - - - MAP - - - - -");
+            Console.WriteLine("\n--- MAP ---");
 
             while (true)
             {
                 Console.WriteLine("Enter map name: ");
                 string mapName = Console.ReadLine() ?? "";
 
-                var selectedMap = _selectMap.SelectMapByName(mapName.Trim());
+                Map? selectedMap = _selectMap.SelectMapByName(mapName.Trim());
 
-                if (selectedMap != null)
+                if (selectedMap == null)
                 {
+                    Console.WriteLine("Map not found. Try again.");
+                }
+                else
+                {
+                    Console.WriteLine($"You selected: {selectedMap.Name}");
                     return selectedMap;
                 }
-
-                Console.WriteLine("Map not found. Try again.");
             }
         }
     }

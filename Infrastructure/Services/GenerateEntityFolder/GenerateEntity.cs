@@ -12,12 +12,12 @@ namespace Infrastructure.Services.GenerateEntityFolder
     {
         public GenerateEntity() { }
 
-        public List<Entity> GenerateEntities()
+        public List<Entity> GenerateEntities(int numOfEnt)
         {
             List<Entity> listOfEntities = new List<Entity>();
             
-            // hardcoded 200 entites, because i want every game to generate the same amount entities
-            for (int i = 0; i < 200; i++)
+            // Best in this simulation is like 120-150
+            for (int i = 0; i < numOfEnt; i++)
             {
                 var entity = new Entity();
                 listOfEntities.Add(entity);
