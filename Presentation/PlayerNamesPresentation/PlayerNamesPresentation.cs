@@ -20,12 +20,6 @@ namespace Presentation.PlayerNamesPresentation
             _playerNames = playerNames;
         }
 
-        /* Logika:
-            1. Unesi naziv igraca
-            2. Unesi naziv heroja
-            3. Spakuj u dictionary
-            */
-
         public Dictionary<string, Hero> EnterPlayersPresentation(string id, TeamNames teamNames, int numOfPlayers)
         {
             if (id == "blue")

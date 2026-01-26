@@ -18,19 +18,17 @@ namespace Infrastructure.Services.BattleServiceFolder
             _attack = attack;
         }
 
-        // main logika:
+        // main logic:
         /*
-            1. Bitka traje dok neki tim ne izgubi sve igrace
-            2. Bira se random igrac iz oba tima koji ce izvrsiti akciju.
-            3. Random je izbor da li ce igrac udariti entitet ili heroja.
-            4. Ako izabere da udari entitet, bira se entitet iz mape i koristi AttackEntity() da izvrsi napad (u jednom udarcu ubija entiteta)
-            5. Ako izabere da udari heroja, bira se random protivnicki igrac i koristi AttackHero() da izvrsi napad (radi mu damage).
-            6. Na kraju svakog kruga, proverava se da li je neki tim izgubio sve igrace.
-         */
-
+            1. The battle continues until one team loses all its players.
+            2. A random player from each team is chosen to perform an action.
+            3. It is randomly decided whether the player attacks an entity or an enemy hero.
+            4. If the player attacks an entity, a map entity is selected and AttackEntity() is used to perform the attack (the entity is killed in one hit).
+            5. If the player attacks a hero, a random opposing player is selected and AttackHero() is used to perform the attack (dealing damage).
+            6. At the end of each round, the program checks whether any team has lost all its players.
+        */
         public void StartBattle(Dictionary<string, Hero> teamBlue, Dictionary<string, Hero> teamRed)
         {
-            // This fight simulation time will not be in this method in the final version
             Random rnd = new Random();
             int seconds = rnd.Next(3, 8);
             Console.WriteLine($"Bitka u toku. Trajaće {seconds} sekundi.");

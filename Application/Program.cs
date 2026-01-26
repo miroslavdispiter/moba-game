@@ -70,15 +70,12 @@ namespace Application
             Dictionary<string, Hero> redPlayers = playerNamesPresentation.EnterPlayersPresentation("red", teamNames, playerCount.RedTeam);
 
             // FIGHT SIMULATION -> 10-45sec
-
             IStoreProvider storeProvider = new StoreProviderService(chosenStore);
             IAttack attackService = new AttackService(entities, storeProvider);
             IBattle battleService = new BattleService(attackService);
             battleService.StartBattle(bluePlayers, redPlayers);
 
             // STATISTICS
-            // Must fix DI problem later
-            
             IBattleStatistics battleStatisticsService = new BattleStatisticsService();
             BattleStatisticsPresentation battleStatsPresentation = new BattleStatisticsPresentation(battleStatisticsService);
             battleStatsPresentation.ChooseOutputAndShow(bluePlayers.Values.ToList(), redPlayers.Values.ToList(), chosenMap, chosenStore);

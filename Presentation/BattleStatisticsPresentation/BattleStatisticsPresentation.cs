@@ -33,12 +33,18 @@ namespace Presentation.BattleStatisticsPresentation
             }
             else if (choice == "2")
             {
+                Console.WriteLine("Enter the name of the document (without extension):");
+                string? userInput = Console.ReadLine();
+
+                string fileName = string.IsNullOrWhiteSpace(userInput)
+                ? $"battle_statistics_{DateTime.Now:yyyyMMdd_HHmm}"
+                : userInput.Trim();
+
                 string projectRoot = AppDomain.CurrentDomain.BaseDirectory;
                 string statsDir = Path.Combine(projectRoot, "Output");
-
                 Directory.CreateDirectory(statsDir);
 
-                string fullPath = Path.Combine(statsDir, $"battle_statistics_{DateTime.Now:yyyyMMdd_HHmm}.txt");
+                string fullPath = Path.Combine(statsDir, $"{fileName}.txt");
 
                 _battleStatisticsService.SaveStatisticsToFile(blueTeam, redTeam, map, store, fullPath);
 

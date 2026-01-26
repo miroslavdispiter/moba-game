@@ -30,13 +30,13 @@ namespace Infrastructure.Services.AttackFolder
         public void AttackEntity(Hero attacker)
         {
             if (_entities.Count == 0) {
-                Console.WriteLine("1. Entiteta vise nema, pa nema sta da napadne.\n");
+                //Console.WriteLine("1. Entiteta vise nema, pa heroj nema kog da napadne.\n");
                 return;
             }
 
-            entitet++;
+            //entitet++;
 
-            Console.WriteLine($"0. Ubijen {entitet}. entitet.");
+            //Console.WriteLine($"0. Ubijen {entitet}. entitet.");
 
             attacker.Gold += _entities[0].Value;
             _entities.RemoveAt(0);
@@ -48,20 +48,14 @@ namespace Infrastructure.Services.AttackFolder
 
             if (defender.HealthPoints <= 400 && defender.HealthPoints > 0)
             {
-                var potion = _store.Potions.FirstOrDefault(p => p.Name == "Health Potion");
-                
-                // Fix this exception after
-                if (potion == null)
-                {
-                    throw new Exception("Potion not found in store.");
-                }
+                Potion? potion = _store.Potions.FirstOrDefault(p => p.Name == "Health Potion");
 
                 if (defender.Gold > potion.Price && potion.AvailableQuantity > 0)
                 {
                     defender.HealthPoints += potion.IncreaseHealth;
                     defender.Gold -= potion.Price;
                     potion.AvailableQuantity--;
-                    Console.WriteLine("2. Health potion bought.");
+                    //Console.WriteLine("2. Health potion bought.");
                 }
             }
 
@@ -78,12 +72,12 @@ namespace Infrastructure.Services.AttackFolder
             }
 
             defender.HealthPoints -= attacker.AttackPower;
-            Console.WriteLine("4. Attacker attacked defender.");
+            //Console.WriteLine("4. Attacker attacked defender.");
 
             if (defender.HealthPoints <= 0)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"⚔️ {attacker.Name} defeated {defender.Name} and earned 300 gold!");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"--- {attacker.Name} defeated {defender.Name} and earned 300 gold! ---");
                 Console.ResetColor();
 
                 attacker.Gold += 300;
@@ -96,7 +90,7 @@ namespace Infrastructure.Services.AttackFolder
 
                 if (attacker.Gold >= weapon.Price && weapon.AvailableQuantity > 0)
                 {
-                    Console.WriteLine("5. Attacker bought something in a shop.");
+                    //Console.WriteLine("5. Attacker bought something in a shop.");
                     attacker.AttackPower += weapon.IncreaseAttack;
                     attacker.Gold -= weapon.Price;
                     weapon.AvailableQuantity--;
